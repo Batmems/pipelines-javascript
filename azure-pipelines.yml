@@ -39,6 +39,6 @@ stages:
   - deployment: VMDeploy
     displayName: Web deploy
     environment:
-      name:  <environment name>
+      name:  JS Test
       resourceType: VirtualMachine
       tags: web1 # Update or remove value to match your tag
