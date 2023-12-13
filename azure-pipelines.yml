@@ -42,4 +42,3 @@ stages:
       name:  <environment name>
       resourceType: VirtualMachine
       tags: web1 # Update or remove value to match your tag
-    strategy:
