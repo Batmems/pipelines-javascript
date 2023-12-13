@@ -35,3 +35,12 @@ stages:
         replaceExistingArchive: true
     - upload: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
       artifact: drop
+
+jobs:  
+- deployment: VMDeploy
+  displayName: Web deploy
+  environment:
+    name:  <environment name>
+    resourceType: VirtualMachine
+    tags: web1 # Update or remove value to match your tag
+  strategy:
