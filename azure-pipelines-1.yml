@@ -4,17 +4,31 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 trigger:
-- main
+- ddd
 
-pool: myUbuntu
+variables:
+  versionNumber: 'vers.1'  # Sie können die Nummer hier manuell setzen oder dynamisch generieren
 
-steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '10.x'
-  displayName: 'Install Node.js'
+jobs:
+- job: CopyAndZipFiles
+  steps:
+  - checkout: self
 
-- script: |
-    npm install
-    npm run build
-  displayName: 'npm install and build'
+  - task: ArchiveFiles@2
+    inputs:
+      rootFolderOrFile: '$(System.DefaultWorkingDirectory)/test'
+      includeRootFolder: false
+      archiveType: 'zip'
+      archiveFile: '$(Build.ArtifactStagingDirectory)/test.zip'
+      replaceExistingArchive: true
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(Build.ArtifactStagingDirectory)'
+      Contents: 'test.zip'
+      TargetFolder: '/home/memet/azagent/Test'
+      CleanTargetFolder: true
+      OverWrite: true
+
+  - script: echo "Version Number:$(versionNumber)"
+    displayName: 'Display Version Number'
