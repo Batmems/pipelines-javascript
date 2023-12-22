@@ -4,7 +4,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 trigger:
-- ddd
+- main
 
 variables:
   versionNumber: 'vers.1'  # Sie können die Nummer hier manuell setzen oder dynamisch generieren
